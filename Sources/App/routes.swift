@@ -13,6 +13,10 @@ func routes(_ app: Application) throws {
         auth.put("update_user", use: authController .updateUser)
     }
     
-    
+    let productsController = ProductsController()
+    app.group("products") { products in
+        products.get(use: productsController.index)
+        products.get(":id", use: productsController.show)
+    }
 
 }
