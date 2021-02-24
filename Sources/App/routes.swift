@@ -8,4 +8,7 @@ func routes(_ app: Application) throws {
     app.get("hello") { req -> String in
         return "Hello, world!"
     }
+    
+    let controller = AuthController()
+    app.post("register", use: controller.register)
 }
