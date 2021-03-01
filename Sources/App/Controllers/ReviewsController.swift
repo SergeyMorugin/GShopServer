@@ -7,7 +7,7 @@
 import Vapor
 
 class ReviewsController {
-    func index(_ req: Request) throws -> EventLoopFuture<ProductsIndexResponse> {
+    func index(_ req: Request) throws -> EventLoopFuture<ReviewsIndexResponse> {
         print(req.content)
         if let page = req.query[Int.self, at: "page"] {
             print(page)
@@ -17,25 +17,37 @@ class ReviewsController {
             print(perPage)
         }
         
-        let response = ProductsIndexResponse(last_page: true, items: [
-            Product(id: 123, name: "Ноутбук", price: 45600),
-            Product(id: 456, name: "Мышка", price: 1000)
+        let response = ReviewsIndexResponse(last_page: true, items: [
+            Review(id: 1, user_id: 1, text: "Review1"),
+            Review(id: 2, user_id: 2, text: "Review2")
         ])
         
         return req.eventLoop.future(response)
     }
     
-    func show(_ req: Request) throws -> EventLoopFuture<ProductShowResponse> {
+    
+    func create(_ req: Request) throws -> EventLoopFuture<ReviewCreateResponse> {
+        guard let body = try? req.content.decode(ReviewCreateRequest.self) else {
+            throw Abort(.badRequest)
+        }
+        print(body)
+
+        let response = ReviewCreateResponse(
+            result: 1,
+            userMessage: "Ваш отзыв был принят на модерацию"
+        )
+        
+        return req.eventLoop.future(response)
+    }
+    
+    func delete(_ req: Request) throws -> EventLoopFuture<CommonResponse> {
         print(req.content)
         guard let id = req.parameters.get("id") else {
             throw Abort(.badRequest)
         }
 
-        let response = ProductShowResponse(
-            id: 1,
-            name: "Ноутбук",
-            price: 45600,
-            desc: "Мощный игровой ноутбук"
+        let response = CommonResponse(
+            result: 1
         )
         
         return req.eventLoop.future(response)
