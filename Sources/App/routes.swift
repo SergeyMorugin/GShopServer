@@ -18,5 +18,12 @@ func routes(_ app: Application) throws {
         products.get(use: productsController.index)
         products.get(":id", use: productsController.show)
     }
+    
+    let reviewsController = ReviewsController()
+    app.group("reviews") { reviews in
+        reviews.get(use: reviewsController.index)
+        reviews.post(use: reviewsController.create)
+        reviews.delete(":id", use: reviewsController.delete)
+    }
 
 }
