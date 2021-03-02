@@ -9,6 +9,6 @@ import Vapor
 
 struct Review: Content {
     let id: Int
-    let user_id: Int
+    let userId: Int
     let text: String
 }

@@ -18,8 +18,8 @@ class ReviewsController {
         }
         
         let response = ReviewsIndexResponse(last_page: true, items: [
-            Review(id: 1, user_id: 1, text: "Review1"),
-            Review(id: 2, user_id: 2, text: "Review2")
+            Review(id: 1, userId: 1, text: "Review1"),
+            Review(id: 2, userId: 2, text: "Review2")
         ])
         
         return req.eventLoop.future(response)
