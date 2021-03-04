@@ -25,5 +25,18 @@ func routes(_ app: Application) throws {
         reviews.post(use: reviewsController.create)
         reviews.delete(":id", use: reviewsController.delete)
     }
+    
+    let cartItemsController = CartItemsController()
+    app.group("cartItems") { route in
+        route.post(use: cartItemsController.create)
+        route.delete(use: cartItemsController.delete)
+    }
+    
+    let cartsController = CartsController()
+    app.group("carts") { route in
+        route.group(":id"){ subroute in
+            subroute.post("checkout",use: cartsController.checkout)
+        }
+    }
 
 }
