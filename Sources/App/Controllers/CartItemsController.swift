@@ -24,10 +24,10 @@ class CartItemsController {
     }
     
     func delete(_ req: Request) throws -> EventLoopFuture<CommonResponse> {
-        guard let body = try? req.content.decode(CartItemsDeleteRequest.self) else {
-            throw Abort(.badRequest)
+        print(req)
+        if let page = req.query[Int.self, at: "productId"] {
+            print(page)
         }
-        print(body)
 
         let response = CommonResponse(
             result: 1

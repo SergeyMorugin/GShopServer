@@ -7,6 +7,6 @@
 import Vapor
 
 struct CartItemsCreateRequest: Content  {
-    var product_id: Int
+    var productId: Int
     var quantity: Int
 }

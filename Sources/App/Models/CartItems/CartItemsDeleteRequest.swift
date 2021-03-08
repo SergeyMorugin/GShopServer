@@ -7,6 +7,6 @@
 import Vapor
 
 struct CartItemsDeleteRequest: Content  {
-    var product_id: Int
+    var productId: Int
 }
 
